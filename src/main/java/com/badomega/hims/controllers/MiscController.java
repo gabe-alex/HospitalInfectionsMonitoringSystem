@@ -20,10 +20,6 @@ public class MiscController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-
     @RequestMapping(value = "/changepass", method = RequestMethod.GET)
     public String showPasswordChangeForm(PasswordChangeDTO passwordChangeDTO) {
         return "change_password";
@@ -34,12 +30,6 @@ public class MiscController {
         if (!bindingResult.hasErrors()) {
             AuthedUser auth = (AuthedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = auth.getUser();
-
-            System.out.println(user.getPassword());
-            System.out.println(passwordChangeDTO.getOld_password());
-            System.out.println(passwordChangeDTO.getPassword());
-            System.out.println(passwordChangeDTO.getPassword_confirm());
-            System.out.println(passwordEncoder.matches(passwordChangeDTO.getOld_password(), user.getPassword()));
 
             user = userService.changeUserPassword(passwordChangeDTO, user);
             if (user == null) {
