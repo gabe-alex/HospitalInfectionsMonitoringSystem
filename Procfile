@@ -1,0 +1,1 @@
+web: java -jar $JAVA_OPTS -Dserver.port=$PORT target/hims-0.0.1-SNAPSHOT.jar
