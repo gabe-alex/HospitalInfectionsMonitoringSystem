@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 @Table(name = "people")
 public class Person {
-
     @Id
     @GeneratedValue
     private Integer id;
@@ -26,6 +25,9 @@ public class Person {
     @JoinTable(name = "person_disease", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "disease_id", referencedColumnName = "id"))
     private Set<InfectiousDisease> diseases;
+
+    @OneToMany(mappedBy="person")
+    private Set<Alert> alerts;
 
 
     public Integer getId() {
@@ -62,5 +64,13 @@ public class Person {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(Set<Alert> alerts) {
+        this.alerts = alerts;
     }
 }
