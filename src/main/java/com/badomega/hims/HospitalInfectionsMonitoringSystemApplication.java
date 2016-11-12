@@ -1,4 +1,4 @@
-package com.badomega;
+package com.badomega.hims;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
