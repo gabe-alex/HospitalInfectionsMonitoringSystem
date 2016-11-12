@@ -17,6 +17,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL, optional=false)
+    private Person person;
+
 
     public Integer getId() {
         return id;
@@ -38,4 +41,11 @@ public class User {
         this.password = password;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 }

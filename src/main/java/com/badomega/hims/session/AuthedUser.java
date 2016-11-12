@@ -8,7 +8,7 @@ public class AuthedUser extends org.springframework.security.core.userdetails.Us
     private User user;
 
     public AuthedUser(User user) {
-        super(user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(Role.DOCTOR/*user.getRole()*/.toString()));
+        super(user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getPerson().getRole().toString()));
         this.user = user;
     }
 
@@ -17,6 +17,6 @@ public class AuthedUser extends org.springframework.security.core.userdetails.Us
     }
 
     public Role getRole() {
-        return Role.DOCTOR /*user.getRole()*/;
+        return user.getPerson().getRole();
     }
 }

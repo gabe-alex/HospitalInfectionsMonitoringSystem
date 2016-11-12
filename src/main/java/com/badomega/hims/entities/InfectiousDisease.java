@@ -22,6 +22,7 @@ public class InfectiousDisease {
     @ManyToMany(mappedBy = "diseases")
     public Set<Person> people;
 
+
     public Integer getId() {
         return id;
     }

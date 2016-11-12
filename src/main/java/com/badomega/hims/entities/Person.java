@@ -19,10 +19,14 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy="person")
+    private User user;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "person_disease", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "disease_id", referencedColumnName = "id"))
     private Set<InfectiousDisease> diseases;
+
 
     public Integer getId() {
         return id;
@@ -50,5 +54,13 @@ public class Person {
 
     public void setDiseases(Set<InfectiousDisease> diseases) {
         this.diseases = diseases;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
