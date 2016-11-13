@@ -80,10 +80,6 @@
                 <li sec:authorize="isAnonymous()"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/login'}?'active' : ''"><a
                         th:href="@{/login}">Log-in<span class="pull-right glyphicon glyphicon-log-in"></span></a></li>
-                <li sec:authorize="isAnonymous()"
-                    th:classappend="${#httpServletRequest.getRequestURI() == '/register'}?'active' : ''"><a
-                        th:href="@{/register}">Register<span class="pull-right glyphicon glyphicon-edit"></span></a>
-                </li>
 
                 <li sec:authorize="isAuthenticated()" class="dropdown"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/changePass'}?'active' : ''">
@@ -110,7 +106,7 @@
                                 th:href="@{/about}">About</a></li>
                         <li th:classappend="${#httpServletRequest.getRequestURI() == '/contact'}?'active' : ''"><a
                                 th:href="@{/contact}">Contact</a></li>
-                        <li><a href="https://github.com/gabe-alex/ComputerAdaptiveTesting" target="_blank">GitHub</a>
+                        <li><a href="https://github.com/gabe-alex/HospitalInfectionsMonitoringSystem" target="_blank">GitHub</a>
                         </li>
                     </ul>
                 </li>
