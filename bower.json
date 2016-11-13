@@ -1,0 +1,10 @@
+{
+  "name": "hims-frontend",
+  "description": "Frontend for the Hospital Infections Monitoring System application",
+  "main": "app.js",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-spring-data-rest": "^0.4.5"
+  }
+}

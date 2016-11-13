@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/about", "/contact", "/css/**", "/images/**").permitAll()
+                .antMatchers("/", "/index", "/about", "/contact", "/css/**", "/images/**", "/bower_components/**").permitAll()
                 .antMatchers("/managedb/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()

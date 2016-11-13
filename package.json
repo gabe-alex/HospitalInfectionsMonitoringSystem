@@ -1,0 +1,7 @@
+{
+  "name": "hims-fronend",
+  "description": "Frontend for the Hospital Infections Monitoring System application",
+  "dependencies": {
+    "bower": "^1.8.0"
+  }
+}
