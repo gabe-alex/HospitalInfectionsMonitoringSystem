@@ -24,7 +24,7 @@ public class Person {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "person_disease", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "disease_id", referencedColumnName = "id"))
-    private Set<InfectiousDisease> diseases;
+    private Set<Disease> diseases;
 
     @OneToMany(mappedBy="person")
     private Set<Alert> alerts;
@@ -50,11 +50,11 @@ public class Person {
         this.role = role;
     }
 
-    public Set<InfectiousDisease> getDiseases() {
+    public Set<Disease> getDiseases() {
         return diseases;
     }
 
-    public void setDiseases(Set<InfectiousDisease> diseases) {
+    public void setDiseases(Set<Disease> diseases) {
         this.diseases = diseases;
     }
 

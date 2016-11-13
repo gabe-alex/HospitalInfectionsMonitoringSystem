@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-public class MiscController {
+public class UserController {
     @Autowired
     private UserService userService;
 

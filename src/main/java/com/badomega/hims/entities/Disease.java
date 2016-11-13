@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "infectious_diseases")
-public class InfectiousDisease {
+@Table(name = "diseases")
+public class Disease {
     @Id
     @GeneratedValue
     private Integer id;
