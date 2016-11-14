@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/about", "/contact", "/css/**", "/images/**", "/bower_components/**").permitAll()
                 .antMatchers("/managedb/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
+                .and().csrf().ignoringAntMatchers("/api/**")
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
     }

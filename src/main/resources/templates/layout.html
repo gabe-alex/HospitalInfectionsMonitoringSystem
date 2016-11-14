@@ -92,6 +92,12 @@
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
+
+                <li sec:authorize="isAuthenticated()"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/db'}?'active' : ''"><a
+                        th:href="@{/db}">DB Test<span
+                        class="pull-right glyphicon glyphicon-list-alt"></span></a></li>
+
                 <li sec:authorize="hasAuthority('ADMIN')"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/managedb'}?'active' : ''"><a
                         th:href="@{/managedb}">Manage Database<span

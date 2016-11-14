@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "angular": "^1.5.8",
-    "angular-spring-data-rest": "^0.4.5"
+    "spring-data-rest-js": "^0.1.2",
+    "angular-ui-grid": "^3.2.9"
   }
 }
