@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout"
+      ng-app="himsApp">
+<head>
+    <title>Beacons</title>
+
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
+    <link href="bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        .home_caption {
+            margin-bottom: 10px;
+        }
+        .grid {
+            width: 100%;
+        }
+
+        .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid {
+            overflow: visible;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" ng-controller="DbController">
+    <div class="jumbotron">
+        <h1>Beacons</h1>
+    </div>
+
+    <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-edit ui-grid-row-edit ui-grid-cellNav ui-grid-resize-columns></div>
+
+    <div>
+        <form>
+            <label>Mac Address</label>
+            <input type="text" ng-model="newBeacon.mac_address" >
+
+            <label>Location Type</label>
+            <select ng-model="newBeacon.spreadRisk" ng-options="spreadRisk.id as spreadRisk.value for spreadRisk in spreadRiskList"></select>
+
+            <label>Location Description</label>
+            <select ng-model="newBeacon.spreadRisk" ng-options="spreadRisk.id as spreadRisk.value for spreadRisk in spreadRiskList"></select>
+
+            <button ng-click="addRow()">Add</button>
+        </form>
+    </div>
+
+</div>
+
+<section layout:fragment="scripts">
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/spring-data-rest-js/dist/spring-data-rest.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="js/app.js"></script>
+</section>
+
+</body>
+</html>

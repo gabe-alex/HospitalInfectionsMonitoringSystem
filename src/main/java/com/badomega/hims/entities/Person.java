@@ -15,8 +15,15 @@ public class Person {
     @Column(nullable = false)
     private String name;
 
+    @Column
+    private Integer age;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(nullable = false)
+    private String phone_mac_address;
+
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy="person")
     private User user;
@@ -40,6 +47,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Role getRole() {
@@ -72,5 +87,13 @@ public class Person {
 
     public void setAlerts(Set<Alert> alerts) {
         this.alerts = alerts;
+    }
+
+    public String getPhone_mac_address() {
+        return phone_mac_address;
+    }
+
+    public void setPhone_mac_address(String phone_mac_address) {
+        this.phone_mac_address = phone_mac_address;
     }
 }

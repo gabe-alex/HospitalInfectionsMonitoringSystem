@@ -11,20 +11,22 @@ spring.request.config = {
     }
 };
 
-var Disease = spring.entity.extend('diseases');
+var Beacon = spring.entity.extend('beacons');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
-    $scope.spreadRiskList = [{id: 'LOW', value: 'LOW'}, {id: 'MEDIUM', value: 'MEDIUM'}, {id: 'HIGH', value: 'HIGH'}];
+    $scope.locationTypeList = [{id: 'SINK', value: 'SINK'}, {id: 'DOOR', value: 'DOOR'}, {id: 'BED', value: 'BED'}];
 
-    $scope.newDisease = {name:'', spreadRisk:''};
+    $scope.newBeacon = {mac_address:'', location_type:'', location_description:''};
 
     $scope.gridOptions = {
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
         appScopeProvider: $scope
     };
     $scope.gridOptions.columnDefs = [
-        { name: 'data().name', displayName: 'Name', enableHiding: false},
-        { name: 'data().spreadRisk', displayName: 'Spread Risk', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownOptionsArray: $scope.spreadRiskList},
+        { name: 'data().mac_address', displayName: 'Mac address', enableHiding: false},
+        { name: 'data().location_type', displayName: 'Location Type', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownOptionsArray: $scope.locationTypeList},
+        { name: 'data().location_description', displayName: 'Location Description', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', enableHiding: false},
+
         { name:' ', width: 100, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
 
@@ -49,18 +51,18 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     };
 
     $scope.addRow = function() {
-        var disease = new Disease($scope.newDisease);
-        disease.save().then(function() {
+        var beacon = new Beacon($scope.newBeacon);
+        beacon.save().then(function() {
             $scope.$apply(function () {
-                $scope.gridOptions.data.push(disease);
-                $scope.newDisease = {name:'', spreadRisk:''};
+                $scope.gridOptions.data.push(beacon);
+                $scope.newBeacon = {name:'', spreadRisk:''};
             });
         });
     };
 
-    Disease.findAll().then(function (diseases) {
+    Beacon.findAll().then(function (beacons) {
         $scope.$apply(function () {
-            $scope.gridOptions.data = diseases;
+            $scope.gridOptions.data = beacons;
         });
     }).catch(function(req) {
         done(req);

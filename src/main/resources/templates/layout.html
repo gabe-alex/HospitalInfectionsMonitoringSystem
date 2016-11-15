@@ -93,15 +93,23 @@
                     </ul>
                 </li>
 
-                <li sec:authorize="isAuthenticated()"
-                    th:classappend="${#httpServletRequest.getRequestURI() == '/db'}?'active' : ''"><a
-                        th:href="@{/db}">DB Test<span
-                        class="pull-right glyphicon glyphicon-list-alt"></span></a></li>
-
-                <li sec:authorize="hasAuthority('ADMIN')"
-                    th:classappend="${#httpServletRequest.getRequestURI() == '/managedb'}?'active' : ''"><a
-                        th:href="@{/managedb}">Manage Database<span
-                        class="pull-right glyphicon glyphicon-list-alt"></span></a></li>
+                <li class ="dropdown" sec:authorize="hasAuthority('ADMIN')"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/db' || #httpServletRequest.getRequestURI() == '/users' ||
+                     #httpServletRequest.getRequestURI() == '/beacons' || #httpServletRequest.getRequestURI() == '/persons'}?'active' : ''">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Database<span class="caret"></span><span
+                        class="pull-right glyphicon glyphicon-list-alt"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/db'}?'active' : ''"><a
+                                th:href="@{/db}">Diseases</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/users'}?'active' : ''"><a
+                                th:href="@{/users}">Users</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/beacons'}?'active' : ''"><a
+                                th:href="@{/beacons}">Beacons</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/persons'}?'active' : ''"><a
+                                th:href="@{/persons}">Persons</a></li>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="dropdown"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/about' || #httpServletRequest.getRequestURI() == '/contact'}?'active' : ''">
