@@ -19,10 +19,7 @@ public class Beacon {
     private LocationType location_type;
 
     @Column(nullable = false)
-    private String location_desription;
-
-    @OneToMany(mappedBy="beacon")
-    private Set<Alert> alerts;
+    private String location_description;
 
 
     public Integer getId() {
@@ -45,19 +42,11 @@ public class Beacon {
         this.location_type = location_type;
     }
 
-    public String getLocation_desription() {
-        return location_desription;
+    public String getLocation_description() {
+        return location_description;
     }
 
-    public void setLocation_desription(String location_desription) {
-        this.location_desription = location_desription;
-    }
-
-    public Set<Alert> getAlerts() {
-        return alerts;
-    }
-
-    public void setAlerts(Set<Alert> alerts) {
-        this.alerts = alerts;
+    public void setLocation_description(String location_description) {
+        this.location_description = location_description;
     }
 }

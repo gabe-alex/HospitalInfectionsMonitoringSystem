@@ -33,10 +33,6 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "disease_id", referencedColumnName = "id"))
     private Set<Disease> diseases;
 
-    @OneToMany(mappedBy="person")
-    private Set<Alert> alerts;
-
-
     public Integer getId() {
         return id;
     }
@@ -79,14 +75,6 @@ public class Person {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Set<Alert> getAlerts() {
-        return alerts;
-    }
-
-    public void setAlerts(Set<Alert> alerts) {
-        this.alerts = alerts;
     }
 
     public String getPhone_mac_address() {
