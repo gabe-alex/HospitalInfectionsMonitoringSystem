@@ -94,7 +94,7 @@
 
                 </li>
 
-                <li sec:authorize="isAuthenticated()" class="dropdown"
+                <li class="dropdown" sec:authorize="hasAuthority('DOCTOR')"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/db' || #httpServletRequest.getRequestURI() == '/persons'}?'active' : ''">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Database<span class="caret"></span><span
                             class="pull-right glyphicon glyphicon-list-alt"></span></a>
