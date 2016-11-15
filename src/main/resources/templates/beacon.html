@@ -36,10 +36,10 @@
             <input type="text" ng-model="newBeacon.mac_address" >
 
             <label>Location Type</label>
-            <select ng-model="newBeacon.spreadRisk" ng-options="spreadRisk.id as spreadRisk.value for spreadRisk in spreadRiskList"></select>
+            <select ng-model="newBeacon.location_type" ng-options="location_type.id as location_type.value for location_type in locationTypeList"></select>
 
             <label>Location Description</label>
-            <select ng-model="newBeacon.spreadRisk" ng-options="spreadRisk.id as spreadRisk.value for spreadRisk in spreadRiskList"></select>
+            <input type="text" ng-model="newBeacon.location_description" >
 
             <button ng-click="addRow()">Add</button>
         </form>
@@ -51,7 +51,7 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/spring-data-rest-js/dist/spring-data-rest.min.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/beacon.js"></script>
 </section>
 
 </body>
