@@ -1,18 +1,9 @@
 var himsApp = angular.module('himsApp', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns']);
 
-spring.request.config = {
-    baseURL: '/api/',
+spring.requestConfig.baseURL = '/api/';
 
-    globalFetchOptions: {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'same-origin'
-    }
-};
-
-var User = spring.entity.extend('users');
-var Person = spring.entity.extend('persons');
+var User = spring.extend('users');
+var Person = spring.extend('persons');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
     $scope.people=[];
@@ -25,9 +16,8 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     };
 
     $scope.gridOptions.columnDefs = [
-        { name: 'data().person', displayName: 'Person', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownOptionsArray: $scope.people},
         { name: 'data().username', displayName: 'Username', enableHiding: false},
-        { name: 'data().password', displayName: 'Password', enableHiding: false},
+        { name: 'data().person', displayName: 'Person', enableHiding: false, cellFilter: 'personCellDisplay', editableCellTemplate: 'ui-grid/dropdownEditor'},
 
         { name:' ', width: 100, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
@@ -64,26 +54,39 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
 
     Person.findAll().then(function (people) {
         $scope.$apply(function () {
-            $scope.people = people;
-        });
-    }).catch(function(req) {
-        done(req);
-    });
-
-    User.findAll().then(function (users) {
-        $scope.gridOptions.data = [];
-            for(var i=0; i<users.length; i++) {
-                var user = users[i];
-                console.log(user);
-                user.fetchProperty('person', Person).then(function(person) {
-                    $scope.$apply(function() {
-                        $scope.gridOptions.data.push(user);
-                    });
-                }).catch(function(req) {
-                    console.error(req);
-                });
+            var parsedPeople = [];
+            for(var i=0; i<people.length; i++) {
+                var person = people[i];
+                parsedPeople.push({id: person, value: person.data().name});
             }
+            $scope.people = parsedPeople;
+            $scope.gridOptions.columnDefs[1].editDropdownOptionsArray = parsedPeople;
+        });
     }).catch(function(req) {
         console.error(req);
     });
-});
+
+    User.findAll().then(function (users) {
+        var promises = [];
+        for(var i=0; i<users.length; i++) {
+            var user = users[i];
+            promises.push(user.fetchProperty('person', Person));
+            Promise.all(promises).then(function() {
+                $scope.$apply(function () {
+                    $scope.gridOptions.data = users;
+                });
+            });
+        }
+    }).catch(function(req) {
+        console.error(req);
+    });
+})
+.filter('personDisplay', function() {
+    return function(input) {
+        if (!input){
+            return '';
+        } else {
+            return input.data().name;
+        }
+    };
+})

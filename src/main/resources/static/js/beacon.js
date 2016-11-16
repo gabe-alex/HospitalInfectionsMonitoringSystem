@@ -1,17 +1,8 @@
 var himsApp = angular.module('himsApp', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns']);
 
-spring.request.config = {
-    baseURL: '/api/',
+spring.requestConfig.baseURL = '/api/';
 
-    globalFetchOptions: {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'same-origin'
-    }
-};
-
-var Beacon = spring.entity.extend('beacons');
+var Beacon = spring.extend('beacons');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
     $scope.locationTypeList = [{id: 'SINK', value: 'SINK'}, {id: 'DOOR', value: 'DOOR'}, {id: 'BED', value: 'BED'}];

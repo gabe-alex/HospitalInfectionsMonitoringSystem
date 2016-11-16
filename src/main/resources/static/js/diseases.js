@@ -1,17 +1,8 @@
 var himsApp = angular.module('himsApp', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns']);
 
-spring.request.config = {
-    baseURL: '/api/',
+spring.requestConfig.baseURL = '/api/';
 
-    globalFetchOptions: {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'same-origin'
-    }
-};
-
-var Disease = spring.entity.extend('diseases');
+var Disease = spring.extend('diseases');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
     $scope.spreadRiskList = [{id: 'LOW', value: 'LOW'}, {id: 'MEDIUM', value: 'MEDIUM'}, {id: 'HIGH', value: 'HIGH'}];

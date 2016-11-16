@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "angular": "^1.5.8",
-    "spring-data-rest-js": "https://github.com/gwuhaolin/spring-data-rest-js.git",
+    "spring-data-rest-js": "https://github.com/gwuhaolin/spring-data-rest-js.git#master",
     "angular-ui-grid": "^3.2.9"
   },
   "resolutions": {

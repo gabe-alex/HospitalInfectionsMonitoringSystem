@@ -1,18 +1,9 @@
 var himsApp = angular.module('himsApp', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ui.grid.resizeColumns']);
 
-spring.request.config = {
-    baseURL: '/api/',
+spring.requestConfig.baseURL = '/api/';
 
-    globalFetchOptions: {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'same-origin'
-    }
-};
-
-var Disease = spring.entity.extend('diseases');
-var Person = spring.entity.extend('persons');
+var Disease = spring.extend('diseases');
+var Person = spring.extend('persons');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
     $scope.roleList = [{id: 'DOCTOR', value: 'DOCTOR'}, {id: 'PATIENT', value: 'PATIENT'}];
