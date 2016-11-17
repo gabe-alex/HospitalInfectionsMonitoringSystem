@@ -60,7 +60,12 @@
             <select ng-model="newPerson.role" ng-options="role.id as role.value for role in roleList"></select>
 
             <label>Infectious disease</label>
-            <select ng-model="newPerson.diseases" ng-options="disease as disease.data().name for disease in diseases"></select>
+            <ui-select multiple ng-model="MODEL_COL_FIELD" theme="select2" ng-disabled="disabled" append-to-body="true">
+                <ui-select-match placeholder="Choose...">{{ $item.data().name }}</ui-select-match>
+                <ui-select-choices repeat="item in diseases | filter: $select.search">
+                    <span>{{ item.data().name }}</span>
+                </ui-select-choices>
+            </ui-select>
 
             <label>Phone MAC address</label>
             <input type="text" ng-model="newPerson.phone_mac_address" >
