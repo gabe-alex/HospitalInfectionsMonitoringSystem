@@ -18,7 +18,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
 
     $scope.gridOptions.columnDefs = [
         { name: 'data().username', displayName: 'Username', enableHiding: false},
-        { name: 'data().person', displayName: 'Person', enableHiding: false, cellFilter: 'personCellDisplay', editableCellTemplate: 'ui-grid/dropdownEditor'},
+        { name: 'data().person', displayName: 'Person', enableHiding: false, cellFilter: 'personDisplay', editableCellTemplate: 'ui-grid/dropdownEditor'},
 
         { name:' ', width: 100, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
