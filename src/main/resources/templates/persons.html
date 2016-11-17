@@ -8,17 +8,35 @@
 
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
     <link href="bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bower_components/select2/select2.css" rel="stylesheet" type="text/css"/>
+    <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet" type="text/css"/>
 
     <style>
         .home_caption {
             margin-bottom: 10px;
         }
+
         .grid {
             width: 100%;
         }
-
         .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid {
             overflow: visible;
+        }
+
+        .ui-grid-cell {
+            overflow: visible;
+            z-index: 99999;
+        }
+        .ui-grid-cell, ui-select-wrap {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .ui-select-container {
+            min-width: 100px;
         }
     </style>
 </head>
@@ -42,7 +60,7 @@
             <select ng-model="newPerson.role" ng-options="role.id as role.value for role in roleList"></select>
 
             <label>Infectious disease</label>
-            <select ng-model="newPerson.infectious_disease" ng-options="infectious_disease.id as infectious_disease.value for infectious_disease in diseases"></select>
+            <select ng-model="newPerson.diseases" ng-options="disease as disease.data().name for disease in diseases"></select>
 
             <label>Phone MAC address</label>
             <input type="text" ng-model="newPerson.phone_mac_address" >
@@ -57,6 +75,26 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/spring-data-rest-js/dist/spring.min.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
+
+    <script type="text/ng-template" id="uiSelect">
+        <ui-select-wrap>
+            &nbsp;
+            <ui-select multiple ng-model="MODEL_COL_FIELD" theme="select2" ng-disabled="disabled" append-to-body="true">
+                <ui-select-match placeholder="Choose...">{{ $item.data().name }}</ui-select-match>
+                <ui-select-choices repeat="item in col.colDef.editDropdownOptionsArray | filter: $select.search">
+                    <span>{{ item.data().name }}</span>
+                </ui-select-choices>
+            </ui-select>
+        </ui-select-wrap>
+    </script>
+
+    <script type="text/ng-template" id="multiCell">
+        <div class="ui-grid-cell-contents">
+            {{ COL_FIELD }}
+        </div>
+    </script>
+
     <script src="js/person.js"></script>
 </section>
 

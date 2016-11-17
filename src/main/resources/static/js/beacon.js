@@ -6,8 +6,9 @@ var Beacon = spring.extend('beacons');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
     $scope.locationTypeList = [{id: 'SINK', value: 'SINK'}, {id: 'DOOR', value: 'DOOR'}, {id: 'BED', value: 'BED'}];
-
     $scope.newBeacon = {mac_address:'', location_type:'', location_description:''};
+
+    var _initialData;
 
     $scope.gridOptions = {
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -28,8 +29,21 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     };
 
     $scope.saveRow = function( rowEntity ) {
-        var promise = rowEntity.save();
-        $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+        for(var i=0; i<_initialData.length; i++) {
+            if(_initialData[i].id == rowEntity.id) {
+                var changedEntity = _initialData[i];
+
+                for(var property in rowEntity.data())
+                {
+                    if(rowEntity.data().hasOwnProperty(property)) {
+                        changedEntity.set(property, rowEntity.get(property));
+                    }
+                }
+
+                var promise = changedEntity.save();
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+            }
+        }
     };
 
     $scope.removeRow = function(rowEntity) {
@@ -53,6 +67,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
 
     Beacon.findAll().then(function (beacons) {
         $scope.$apply(function () {
+            _initialData = angular.copy(beacons);
             $scope.gridOptions.data = beacons;
         });
     }).catch(function(req) {

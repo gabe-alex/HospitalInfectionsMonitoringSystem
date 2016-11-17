@@ -6,8 +6,9 @@ var Disease = spring.extend('diseases');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
     $scope.spreadRiskList = [{id: 'LOW', value: 'LOW'}, {id: 'MEDIUM', value: 'MEDIUM'}, {id: 'HIGH', value: 'HIGH'}];
-
     $scope.newDisease = {name:'', spreadRisk:''};
+
+    var _initialData;
 
     $scope.gridOptions = {
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -26,13 +27,26 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     };
 
     $scope.saveRow = function( rowEntity ) {
-        var promise = rowEntity.save();
-        $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+        for(var i=0; i<_initialData.length; i++) {
+            if(_initialData[i].id == rowEntity.id) {
+                var changedEntity = _initialData[i];
+
+                for(var property in rowEntity.data())
+                {
+                    if(rowEntity.data().hasOwnProperty(property)) {
+                        changedEntity.set(property, rowEntity.get(property));
+                    }
+                }
+
+                var promise = changedEntity.save();
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+            }
+        }
     };
 
     $scope.removeRow = function(rowEntity) {
         var index = $scope.gridOptions.data.indexOf(rowEntity);
-        rowEntity.delete().then(function() {
+        rowEntity.remove().then(function() {
             $scope.$apply(function () {
                 $scope.gridOptions.data.splice(index, 1);
             });
@@ -51,6 +65,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
 
     Disease.findAll().then(function (diseases) {
         $scope.$apply(function () {
+            _initialData = angular.copy(diseases);
             $scope.gridOptions.data = diseases;
         });
     }).catch(function(req) {

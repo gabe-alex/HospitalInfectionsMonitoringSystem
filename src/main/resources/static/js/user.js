@@ -6,9 +6,10 @@ var User = spring.extend('users');
 var Person = spring.extend('persons');
 
 himsApp.controller('DbController', function DbController($scope, uiGridConstants) {
+    $scope.newUser = {person:'', username:'',password:''};
     $scope.people=[];
 
-    $scope.newUser = {person:'', username:'',password:''};
+    var _initialData;
 
     $scope.gridOptions = {
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -29,8 +30,21 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     };
 
     $scope.saveRow = function( rowEntity ) {
-        var promise = rowEntity.save();
-        $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+        for(var i=0; i<_initialData.length; i++) {
+            if(_initialData[i].id == rowEntity.id) {
+                var changedEntity = _initialData[i];
+
+                for(var property in rowEntity.data())
+                {
+                    if(rowEntity.data().hasOwnProperty(property)) {
+                        changedEntity.set(property, rowEntity.get(property));
+                    }
+                }
+
+                var promise = changedEntity.save();
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+            }
+        }
     };
 
     $scope.removeRow = function(rowEntity) {
@@ -73,6 +87,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
             promises.push(user.fetchProperty('person', Person));
             Promise.all(promises).then(function() {
                 $scope.$apply(function () {
+                    _initialData = angular.copy(users);
                     $scope.gridOptions.data = users;
                 });
             });
@@ -89,4 +104,4 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
             return input.data().name;
         }
     };
-})
+});
