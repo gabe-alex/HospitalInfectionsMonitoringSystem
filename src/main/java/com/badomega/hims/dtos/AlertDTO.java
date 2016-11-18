@@ -20,6 +20,14 @@ public class AlertDTO {
         this.targetToSelfDiseases = targetToSelfDiseases;
     }
 
+    public Interaction getInteraction() {
+        return interaction;
+    }
+
+    public void setInteraction(Interaction interaction) {
+        this.interaction = interaction;
+    }
+
     public List<Disease> getSelfToTargetDiseases() {
         return selfToTargetDiseases;
     }
