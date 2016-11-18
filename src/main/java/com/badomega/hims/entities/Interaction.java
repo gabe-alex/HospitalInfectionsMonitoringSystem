@@ -1,6 +1,7 @@
 package com.badomega.hims.entities;
 
 import com.badomega.hims.enums.AlertType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,10 +24,12 @@ public class Interaction {
     @JoinColumn(name = "self_mac_address", referencedColumnName = "phone_mac_address", insertable = false, updatable = false)
     private Person self;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne
     @JoinColumn(name = "target_mac_address", referencedColumnName = "phone_mac_address", insertable = false, updatable = false)
     private Person targetPerson;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne
     @JoinColumn(name = "target_mac_address", referencedColumnName = "mac_address", insertable = false, updatable = false)
     private Beacon targetBeacon;
