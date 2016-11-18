@@ -2,6 +2,9 @@ package com.badomega.hims.entities;
 
 import com.badomega.hims.enums.Role;
 import com.badomega.hims.enums.SpreadRisk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,6 +22,7 @@ public class Disease {
     @Enumerated(EnumType.STRING)
     private SpreadRisk spreadRisk;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "diseases")
     public Set<Person> people;
 

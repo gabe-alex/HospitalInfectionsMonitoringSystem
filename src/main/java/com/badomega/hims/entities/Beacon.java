@@ -1,13 +1,17 @@
 package com.badomega.hims.entities;
 
 import com.badomega.hims.enums.LocationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "beacons")
-public class Beacon {
+public class Beacon implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
@@ -20,6 +24,10 @@ public class Beacon {
 
     @Column(nullable = false)
     private String location_description;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "targetBeacon")
+    private Set<Interaction> interactions;
 
 
     public Integer getId() {
@@ -48,5 +56,13 @@ public class Beacon {
 
     public void setLocation_description(String location_description) {
         this.location_description = location_description;
+    }
+
+    public Set<Interaction> getInteractions() {
+        return interactions;
+    }
+
+    public void setInteractions(Set<Interaction> interactions) {
+        this.interactions = interactions;
     }
 }

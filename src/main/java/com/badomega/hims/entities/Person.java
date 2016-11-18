@@ -1,13 +1,17 @@
 package com.badomega.hims.entities;
 
 import com.badomega.hims.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "people")
-public class Person {
+public class Person implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
@@ -24,7 +28,7 @@ public class Person {
     @Column(nullable = false)
     private String phone_mac_address;
 
-
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy="person")
     private User user;
 
@@ -32,6 +36,14 @@ public class Person {
     @JoinTable(name = "person_disease", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "disease_id", referencedColumnName = "id"))
     private Set<Disease> diseases;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "self")
+    private Set<Interaction> interactionsFrom;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "targetPerson")
+    private Set<Interaction> interactionsTo;
 
     public Integer getId() {
         return id;
@@ -83,5 +95,21 @@ public class Person {
 
     public void setPhone_mac_address(String phone_mac_address) {
         this.phone_mac_address = phone_mac_address;
+    }
+
+    public Set<Interaction> getInteractionsFrom() {
+        return interactionsFrom;
+    }
+
+    public void setInteractionsFrom(Set<Interaction> interactionsFrom) {
+        this.interactionsFrom = interactionsFrom;
+    }
+
+    public Set<Interaction> getInteractionsTo() {
+        return interactionsTo;
+    }
+
+    public void setInteractionsTo(Set<Interaction> interactionsTo) {
+        this.interactionsTo = interactionsTo;
     }
 }

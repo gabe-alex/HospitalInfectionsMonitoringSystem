@@ -13,11 +13,23 @@ public class Interaction {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "self_mac_address")
     private String selfMacAddress;
 
-    @Column
+    @Column(name = "target_mac_address")
     private String targetMacAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "self_mac_address", referencedColumnName = "phone_mac_address", insertable = false, updatable = false)
+    private Person self;
+
+    @ManyToOne
+    @JoinColumn(name = "target_mac_address", referencedColumnName = "phone_mac_address", insertable = false, updatable = false)
+    private Person targetPerson;
+
+    @ManyToOne
+    @JoinColumn(name = "target_mac_address", referencedColumnName = "mac_address", insertable = false, updatable = false)
+    private Beacon targetBeacon;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTimestamp;
@@ -46,6 +58,30 @@ public class Interaction {
 
     public void setTargetMacAddress(String targetMacAddress) {
         this.targetMacAddress = targetMacAddress;
+    }
+
+    public Person getSelf() {
+        return self;
+    }
+
+    public void setSelf(Person self) {
+        this.self = self;
+    }
+
+    public Person getTargetPerson() {
+        return targetPerson;
+    }
+
+    public void setTargetPerson(Person targetPerson) {
+        this.targetPerson = targetPerson;
+    }
+
+    public Beacon getTargetBeacon() {
+        return targetBeacon;
+    }
+
+    public void setTargetBeacon(Beacon targetBeacon) {
+        this.targetBeacon = targetBeacon;
     }
 
     public Date getStartTimestamp() {
