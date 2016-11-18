@@ -38,7 +38,7 @@ public class AlertController {
                 List<Disease> tergetToSelfDiseases = newRiskyDiseases(interaction.getTargetPerson(), interaction.getSelf());
 
                 if (selfToTargetDiseases.size() > 0 || tergetToSelfDiseases.size() > 0) {
-                    alerts.add(new AlertDTO(interaction.getSelf(), interaction.getTargetPerson(), selfToTargetDiseases, tergetToSelfDiseases));
+                    alerts.add(new AlertDTO(interaction, selfToTargetDiseases, tergetToSelfDiseases));
                 }
             }
         }
