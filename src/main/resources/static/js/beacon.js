@@ -17,7 +17,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     $scope.gridOptions.columnDefs = [
         { name: 'data().mac_address', width: 200, displayName: 'Mac address', enableHiding: false},
         { name: 'data().location_type', width: 180, displayName: 'Location Type', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownOptionsArray: $scope.locationTypeList},
-        { name: 'data().location_description', displayName: 'Location Description', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', enableHiding: false},
+        { name: 'data().location_description', displayName: 'Location Description', enableHiding: false},
 
         { name:' ', width: 80, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
