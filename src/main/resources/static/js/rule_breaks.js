@@ -9,9 +9,10 @@ himsApp.controller('DbController', function DbController($scope, $http, uiGridCo
     };
 
     $scope.gridOptions.columnDefs = [
-        { name: 'person.name', width: 100, displayName: 'User', enableHiding: false},
-        { name: 'otherPerson.name', width: 100, displayName: 'Other User', enableHiding: false},
-        { name: 'beacon.location_description', width: 300, displayName: 'Location', enableHiding: false},
+        { name: 'date', width: 200, displayName: 'Date', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'", sort: {direction: uiGridConstants.ASC, priority: 0}},
+        { name: 'person.name', width: 140, displayName: 'User', enableHiding: false},
+        { name: 'otherPerson.name', width: 140, displayName: 'Other User', enableHiding: false},
+        { name: 'beacon.location_description', width: 240, displayName: 'Location', enableHiding: false},
         { name: 'message', displayName: 'Violation', enableHiding: false}
     ];
 

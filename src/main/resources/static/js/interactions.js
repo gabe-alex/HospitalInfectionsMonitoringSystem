@@ -13,11 +13,11 @@ himsApp.controller('DbController', function DbController($scope, $http, uiGridCo
     };
 
     $scope.gridOptions.columnDefs = [
+        { name: 'data().startTimestamp', width: 200, displayName: 'Meeting Start Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'", sort: {direction: uiGridConstants.ASC, priority: 0}},
+        { name: 'data().endTimestamp', width: 200, displayName: 'Meeting End Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"},
         { name: 'data().selfPerson.data().name', width: 200, displayName: 'User', enableHiding: false},
         { name: 'data().targetPerson.data().name', width: 200, displayName: 'Other User', enableHiding: false},
-        { name: 'data().targetBeacon.data().location_description', displayName: 'Other Beacon', enableHiding: false},
-        { name: 'data().startTimestamp', width: 200, displayName: 'Meeting Start Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'", sort: {direction: uiGridConstants.ASC, priority: 0}},
-        { name: 'data().endTimestamp', width: 200, displayName: 'Meeting End Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"}
+        { name: 'data().targetBeacon.data().location_description', displayName: 'Other Beacon', enableHiding: false}
     ];
 
     Interactions.search('getValid').then(function (interactions) {
