@@ -123,6 +123,8 @@
                                 th:href="@{/beacons}">Beacons</a></li>
                         <li th:classappend="${#httpServletRequest.getRequestURI() == '/persons'}?'active' : ''"><a
                                 th:href="@{/persons}">Persons</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/interactions'}?'active' : ''"><a
+                                th:href="@{/interactions}">Interactions</a></li>
                         </li>
                     </ul>
                 </li>
