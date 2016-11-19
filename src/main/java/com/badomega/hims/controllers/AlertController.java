@@ -150,7 +150,7 @@ public class AlertController {
                     if (person.getRole() == Role.PATIENT && interaction.getStartTimestamp() != null) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(interaction.getStartTimestamp());
-                        calendar.add(Calendar.MINUTE, -5);
+                        calendar.add(Calendar.MINUTE, -3);
 
                         if (lastUsedToiledTime != null && lastUsedToiledTime.after(calendar.getTime())) {
                             ruleBreaks.add(new RuleBreakDTO(
@@ -166,9 +166,9 @@ public class AlertController {
                 if (person.getRole() == Role.DOCTOR && interaction.getTargetPerson() != null && interaction.getTargetPerson().getRole() == Role.PATIENT) {
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(interaction.getStartTimestamp());
-                    calendar.add(Calendar.MINUTE, -5);
+                    calendar.add(Calendar.MINUTE, -3);
 
-                    if (lastWashedTime == null || lastWashedTime.after(calendar.getTime())) {
+                    if (lastWashedTime == null || lastWashedTime.before(calendar.getTime())) {
                         ruleBreaks.add(new RuleBreakDTO(
                                 interaction.getStartTimestamp(),
                                 person,
