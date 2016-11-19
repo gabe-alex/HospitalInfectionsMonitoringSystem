@@ -17,11 +17,11 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
         appScopeProvider: $scope
     };
     $scope.gridOptions.columnDefs = [
-        { name: 'data().name', width: 100, displayName: 'Name', enableHiding: false},
+        { name: 'data().name', width: 200, displayName: 'Name', enableHiding: false},
         { name: 'data().age', width: 60, displayName: 'Age', enableHiding: false},
         { name: 'data().role', width: 100, displayName: 'Role', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownOptionsArray: $scope.roleList},
         { name: 'data().diseases', displayName: 'Infectious Diseases', enableHiding: false, cellFilter: 'diseasesDisplay',editableCellTemplate: 'uiSelect'},
-        { name: 'data().phone_mac_address', width: 100, displayName: 'Phone MAC Address', enableHiding: false},
+        { name: 'data().phone_mac_address', width: 240, displayName: 'Phone MAC Address', enableHiding: false},
 
         { name:' ', width: 80, editable: false, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
