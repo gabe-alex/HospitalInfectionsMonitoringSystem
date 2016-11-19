@@ -20,7 +20,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
         { name: 'data().username', displayName: 'Username', enableHiding: false},
         { name: 'data().person', displayName: 'Person', enableHiding: false, cellFilter: 'personDisplay', editableCellTemplate: 'ui-grid/dropdownEditor'},
 
-        { name:' ', width: 100, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
+        { name:' ', width: 80, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
 
     $scope.gridOptions.onRegisterApi = function(gridApi){

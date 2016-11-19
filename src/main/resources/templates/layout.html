@@ -131,6 +131,10 @@
                     th:classappend="${#httpServletRequest.getRequestURI() == '/monitoring' }?'active' : ''">
                      <a th:href="@{/monitoring}">Infections monitoring<span class="pull-right glyphicon glyphicon-ok"></span></a></li>
 
+                <li class="dropdown" sec:authorize="isAuthenticated()"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/rule_breaks' }?'active' : ''">
+                    <a th:href="@{/rule_breaks}">Rule Violations<span class="pull-right glyphicon glyphicon-ok"></span></a></li>
+
 
                 <li class="dropdown"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/about' || #httpServletRequest.getRequestURI() == '/contact'}?'active' : ''">

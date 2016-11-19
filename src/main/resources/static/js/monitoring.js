@@ -9,12 +9,12 @@ himsApp.controller('DbController', function DbController($scope, $http, uiGridCo
     };
 
     $scope.gridOptions.columnDefs = [
-        { name: 'interaction.self.name', displayName: 'User', enableHiding: false},
-        { name: 'interaction.targetPerson.name', displayName: 'Other User', enableHiding: false},
+        { name: 'interaction.self.name', width: 100, displayName: 'User', enableHiding: false},
+        { name: 'interaction.targetPerson.name', width: 100, displayName: 'Other User', enableHiding: false},
         { name: 'selfToTargetDiseases', displayName: 'To', enableHiding: false, cellFilter: 'diseasesDisplay'},
         { name: 'targetToSelfDiseases', displayName: 'From', enableHiding: false, cellFilter: 'diseasesDisplay'},
-        { name: 'interaction.startTimestamp', displayName: 'Meeting Start Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"},
-        { name: 'interaction.endTimestamp', displayName: 'Meeting End Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"}
+        { name: 'interaction.startTimestamp', width: 200, displayName: 'Meeting Start Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"},
+        { name: 'interaction.endTimestamp', width: 200, displayName: 'Meeting End Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"}
     ];
 
     function fetchData() {

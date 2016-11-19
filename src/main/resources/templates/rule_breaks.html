@@ -4,7 +4,7 @@
       layout:decorator="layout"
       ng-app="himsApp">
 <head>
-    <title>Alerts</title>
+    <title>Rule Violations</title>
 
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
     <link href="bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet" type="text/css"/>
@@ -25,7 +25,7 @@
 <body>
 <div layout:fragment="content" ng-controller="DbController">
     <div class="jumbotron">
-        <h1>Alerts</h1>
+        <h1>Rule Violations</h1>
     </div>
 
     <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-cellNav ui-grid-resize-columns></div>
@@ -35,7 +35,7 @@
 <section layout:fragment="scripts">
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
-    <script src="js/monitoring.js"></script>
+    <script src="js/rule_breaks.js"></script>
 </section>
 
 </body>

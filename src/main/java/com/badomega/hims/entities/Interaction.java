@@ -43,6 +43,9 @@ public class Interaction {
     @Column
     private Float minDistance;
 
+    @OneToMany(mappedBy = "interaction")
+    private Set<InteractionDisease> interactionDiseases;
+
     public Integer getId() {
         return id;
     }
@@ -109,5 +112,13 @@ public class Interaction {
 
     public void setMinDistance(Float minDistance) {
         this.minDistance = minDistance;
+    }
+
+    public Set<InteractionDisease> getInteractionDiseases() {
+        return interactionDiseases;
+    }
+
+    public void setInteractionDiseases(Set<InteractionDisease> interactionDiseases) {
+        this.interactionDiseases = interactionDiseases;
     }
 }

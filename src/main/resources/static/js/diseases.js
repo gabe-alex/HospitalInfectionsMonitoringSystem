@@ -17,7 +17,7 @@ himsApp.controller('DbController', function DbController($scope, uiGridConstants
     $scope.gridOptions.columnDefs = [
         { name: 'data().name', displayName: 'Name', enableHiding: false},
         { name: 'data().spreadRisk', displayName: 'Spread Risk', enableHiding: false, editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownOptionsArray: $scope.spreadRiskList},
-        { name:' ', width: 100, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
+        { name:' ', width: 80, width: 100, enableHiding: false, enableSorting: false, enableColumnMenu: false, cellTemplate:'<div><button ng-click="grid.appScope.removeRow(row.entity)">Remove</button></div>'}
     ];
 
     $scope.gridOptions.onRegisterApi = function(gridApi){
