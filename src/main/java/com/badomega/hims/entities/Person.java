@@ -38,7 +38,7 @@ public class Person implements Serializable {
     private Set<Disease> diseases;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "self")
+    @OneToMany(mappedBy = "selfPerson")
     private Set<Interaction> interactionsFrom;
 
     @JsonIgnore

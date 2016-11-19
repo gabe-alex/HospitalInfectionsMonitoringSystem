@@ -10,7 +10,7 @@ import java.util.Set;
 public interface InteractionRepository extends CrudRepository<Interaction, Integer> {
     @Query("select i " +
             "from Interaction i " +
-            "join i.self s " +
+            "join i.selfPerson s " +
             "left join i.targetPerson tp " +
             "left join i.targetBeacon tb " +
             "where (tp is not null or tb is not null)")

@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/about", "/contact", "/css/**", "/images/**", "/bower_components/**", "/api/**", "/srv/**").permitAll()
-                .antMatchers("/users", "/beacons").hasAuthority("ADMIN")
+                .antMatchers("/users", "/beacons", "/interactions").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().csrf().ignoringAntMatchers("/api/**")
                 .and().formLogin().loginPage("/login").permitAll()

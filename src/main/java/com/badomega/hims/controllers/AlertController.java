@@ -1,7 +1,7 @@
 package com.badomega.hims.controllers;
 
 import com.badomega.hims.dtos.AlertDTO;
-import com.badomega.hims.dtos.PasswordChangeDTO;
+import com.badomega.hims.dtos.LoggedPairDTO;
 import com.badomega.hims.dtos.RuleBreakDTO;
 import com.badomega.hims.entities.Beacon;
 import com.badomega.hims.entities.Disease;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Controller
@@ -35,21 +33,45 @@ public class AlertController {
     @ResponseBody
     public List<AlertDTO> getAlerts() {
         List<AlertDTO> alerts = new ArrayList<>();
+        List<LoggedPairDTO> loggedPairs = new ArrayList<>();
         Set<Interaction> validInteractions = interactionRepository.getValid();
 
         for(Interaction interaction : validInteractions)
         {
             if(interaction.getTargetPerson() != null) {
-                List<Disease> selfToTargetDiseases = newRiskyDiseases(interaction.getSelf(), interaction.getTargetPerson());
-                List<Disease> tergetToSelfDiseases = newRiskyDiseases(interaction.getTargetPerson(), interaction.getSelf());
+                LoggedPairDTO loggedPair = getLoggedPair(interaction.getSelfPerson(), interaction.getTargetPerson(), loggedPairs);
+                if(loggedPair != null) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(interaction.getStartTimestamp());
+                    calendar.add(Calendar.MINUTE, -2);
+                    if(loggedPair.getInteractionDate() == null || loggedPair.getInteractionDate().before(calendar.getTime())) {
+                        List<Disease> selfToTargetDiseases = newRiskyDiseases(interaction.getSelfPerson(), interaction.getTargetPerson());
+                        List<Disease> tergetToSelfDiseases = newRiskyDiseases(interaction.getTargetPerson(), interaction.getSelfPerson());
 
-                if (selfToTargetDiseases.size() > 0 || tergetToSelfDiseases.size() > 0) {
-                    alerts.add(new AlertDTO(interaction, selfToTargetDiseases, tergetToSelfDiseases));
+                        if (selfToTargetDiseases.size() > 0 || tergetToSelfDiseases.size() > 0) {
+                            alerts.add(new AlertDTO(interaction, selfToTargetDiseases, tergetToSelfDiseases));
+                        }
+                    }
+                    loggedPairs.remove(loggedPair);
                 }
+                loggedPairs.add(new LoggedPairDTO(interaction.getSelfPerson(), interaction.getTargetPerson(), interaction.getStartTimestamp()));
             }
         }
 
         return alerts;
+    }
+
+    private LoggedPairDTO getLoggedPair(Person selfPerson, Person otherPerson, List<LoggedPairDTO> loggedPairs)
+    {
+        for (LoggedPairDTO loggedPair : loggedPairs)
+        {
+            if((loggedPair.getSelfPerson().getId() == selfPerson.getId() && loggedPair.getOtherPerson().getId() == otherPerson.getId()) ||
+                    (loggedPair.getSelfPerson().getId() == otherPerson.getId() && loggedPair.getOtherPerson().getId() == selfPerson.getId()))
+            {
+                return loggedPair;
+            }
+        }
+        return null;
     }
 
     private List<Disease> riskyDiseases(Person person)
@@ -125,7 +147,7 @@ public class AlertController {
                     lastWashedTime = interaction.getEndTimestamp();
                     lastWashedPlace = interaction.getTargetBeacon();
 
-                    if (person.getRole() == Role.PATIENT) {
+                    if (person.getRole() == Role.PATIENT && interaction.getStartTimestamp() != null) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(interaction.getStartTimestamp());
                         calendar.add(Calendar.MINUTE, -5);

@@ -22,7 +22,7 @@ public class Interaction {
 
     @ManyToOne
     @JoinColumn(name = "self_mac_address", referencedColumnName = "phone_mac_address", insertable = false, updatable = false)
-    private Person self;
+    private Person selfPerson;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne
@@ -66,12 +66,12 @@ public class Interaction {
         this.targetMacAddress = targetMacAddress;
     }
 
-    public Person getSelf() {
-        return self;
+    public Person getSelfPerson() {
+        return selfPerson;
     }
 
-    public void setSelf(Person self) {
-        this.self = self;
+    public void setSelfPerson(Person self) {
+        this.selfPerson = self;
     }
 
     public Person getTargetPerson() {

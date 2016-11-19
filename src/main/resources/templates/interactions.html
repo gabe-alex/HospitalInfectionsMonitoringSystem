@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout"
+      ng-app="himsApp">
+<head>
+    <title>Interactions</title>
+
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
+    <link href="bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        .home_caption {
+            margin-bottom: 10px;
+        }
+        .grid {
+            width: 100%;
+        }
+
+        .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid {
+            overflow: visible;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" ng-controller="DbController">
+    <div class="jumbotron">
+        <h1>Interactions</h1>
+    </div>
+
+    <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-cellNav ui-grid-resize-columns></div>
+
+</div>
+
+<section layout:fragment="scripts">
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/spring-data-rest-js/dist/spring.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="js/interactions.js"></script>
+</section>
+
+</body>
+</html>
