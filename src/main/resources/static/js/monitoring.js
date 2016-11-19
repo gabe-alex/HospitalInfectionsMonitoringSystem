@@ -13,8 +13,8 @@ himsApp.controller('DbController', function DbController($scope, $http, uiGridCo
         { name: 'interaction.targetPerson.name', displayName: 'Other User', enableHiding: false},
         { name: 'selfToTargetDiseases', displayName: 'To', enableHiding: false, cellFilter: 'diseasesDisplay'},
         { name: 'targetToSelfDiseases', displayName: 'From', enableHiding: false, cellFilter: 'diseasesDisplay'},
-        { name: 'interaction.startTimestamp', displayName: 'Meeting Start Time', enableHiding: false, cellFilter: "date : 'HH:mm:ss, dd.MM.yyyy' : '+0300'"},
-        { name: 'interaction.endTimestamp', displayName: 'Meeting End Time', enableHiding: false, cellFilter: "date : 'HH:mm:ss, dd.MM.yyyy' : '+0300'"}
+        { name: 'interaction.startTimestamp', displayName: 'Meeting Start Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"},
+        { name: 'interaction.endTimestamp', displayName: 'Meeting End Time', enableHiding: false, cellFilter: "date : 'dd.MM.yyyy HH:mm:ss'"}
     ];
 
     function fetchData() {
