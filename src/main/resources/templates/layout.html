@@ -123,11 +123,13 @@
                                 th:href="@{/beacons}">Beacons</a></li>
                         <li th:classappend="${#httpServletRequest.getRequestURI() == '/persons'}?'active' : ''"><a
                                 th:href="@{/persons}">Persons</a></li>
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/interactions'}?'active' : ''"><a
-                                th:href="@{/interactions}">Interactions</a></li>
                         </li>
                     </ul>
                 </li>
+
+                <li sec:authorize="hasAuthority('ADMIN')"
+                     th:classappend="${#httpServletRequest.getRequestURI() == '/interactions'}?'active' : ''"><a
+                        th:href="@{/interactions}">Interactions<span class="pull-right glyphicon glyphicon-transfer"></span></a></li>
 
                 <li class="dropdown" sec:authorize="isAuthenticated()"
                     th:classappend="${#httpServletRequest.getRequestURI() == '/monitoring' }?'active' : ''">
